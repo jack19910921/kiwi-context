@@ -13,6 +13,8 @@ import static org.kiwi.context.ProfileUtil.generateConfigPath;
  */
 public class KiwiConfig {
 
+    private static final Properties PROPS = new Properties();
+
     private KiwiConfig() {
         try {
             String profileEnv = determineProfileEnv();
@@ -25,10 +27,9 @@ public class KiwiConfig {
             try {
                 in = Thread.currentThread().getContextClassLoader().getResourceAsStream(configPath);
 
-                Properties props = new Properties();
-                props.load(in);
+                PROPS.load(in);
 
-                PropertiesHolder.addProperties(props);
+                PropertiesHolder.addProperties(PROPS);
             } finally {
                 if (in != null) {
                     in.close();
@@ -37,6 +38,10 @@ public class KiwiConfig {
         } catch (Exception e) {
             throw new KiwiException("loading config has some problem.", e);
         }
+    }
+
+    public Properties getConfig() {
+        return PROPS;
     }
 
     public static KiwiConfig getInstance() {

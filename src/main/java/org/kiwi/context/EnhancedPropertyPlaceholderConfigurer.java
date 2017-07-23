@@ -4,7 +4,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -21,7 +20,6 @@ import static org.kiwi.context.ProfileUtil.generateConfigPath;
  * @email jack.liu.19910921@gmail.com
  * Created by jack on 17/7/20.
  */
-@Component
 public class EnhancedPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer implements InitializingBean {
 
     @Override
