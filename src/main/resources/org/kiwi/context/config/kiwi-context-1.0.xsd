@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns="http://www.kiwi.org/schema/data"
+            xmlns="http://www.kiwi.org/schema/context"
             elementFormDefault="qualified"
-            targetNamespace="http://www.kiwi.org/schema/data">
+            targetNamespace="http://www.kiwi.org/schema/context">
 
     <xsd:element name="property-placeholder">
         <xsd:complexType>
