@@ -14,6 +14,10 @@ public interface Constant {
 
     String PROFILE_ENV = "profile.env";
 
+    String WEB_INF = "WEB-INF";
+
+    String CLASSES = "classes";
+
     String CONFIG = "config";
 
     String CONFIG_PROPERTIES = "config.properties";
