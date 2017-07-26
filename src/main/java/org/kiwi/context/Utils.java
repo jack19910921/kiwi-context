@@ -114,6 +114,18 @@ public class Utils {
         return array == null || array.length == 0;
     }
 
+    public static boolean isNotEmpty(final Collection<?> coll) {
+        return !isEmpty(coll);
+    }
+
+    public static boolean isNotEmpty(final Map map) {
+        return !isEmpty(map);
+    }
+
+    public static boolean isNotEmpty(final CharSequence cs) {
+        return !isEmpty(cs);
+    }
+
     public static boolean isEmpty(final Collection<?> coll) {
         return coll == null || coll.isEmpty();
     }
