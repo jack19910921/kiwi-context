@@ -37,6 +37,8 @@ public class KiwiConfig {
             }
         } catch (Exception e) {
             throw new KiwiException("loading config has some problem.", e);
+        } finally {
+            DeployPathHolder.clear();
         }
     }
 

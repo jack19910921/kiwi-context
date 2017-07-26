@@ -1,10 +1,9 @@
 package org.kiwi.context;
 
-import org.springframework.util.StringUtils;
-
 import java.io.File;
 
 import static org.kiwi.context.Constant.*;
+import static org.kiwi.context.Utils.isBlank;
 
 /**
  * @email jack.liu.19910921@gmail.com
@@ -15,7 +14,7 @@ public class ProfileUtil {
     public static String determineProfileEnv() {
         String profileEnv = PropertiesHolder.getProperty(PROFILE_ENV);
 
-        if (!StringUtils.hasText(profileEnv)) {
+        if (isBlank(profileEnv)) {
             profileEnv = PROFILE_PRODUCTION;
         }
 
