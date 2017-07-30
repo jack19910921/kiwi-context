@@ -1,5 +1,6 @@
 package org.kiwi.context.config;
 
+import org.kiwi.context.EnhancedPropertyPlaceholderConfigurer;
 import org.kiwi.context.KiwiConfig;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
@@ -21,7 +22,7 @@ public class EnhancedPropertyPlaceholderBeanDefinitionParser extends AbstractSin
 
     @Override
     protected Class<?> getBeanClass(Element element) {
-        return EnhancedPropertyPlaceholderBeanDefinitionParser.class;
+        return EnhancedPropertyPlaceholderConfigurer.class;
     }
 
     @Override
