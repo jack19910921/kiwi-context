@@ -26,10 +26,14 @@ public class ProfileUtil {
         return profileEnv;
     }
 
-    public static String generateConfigPath(String profileEnv) {
+    public static String generateDefaultConfigPath(String profileEnv) {
         return CONFIG +
                 File.separator + profileEnv +
                 File.separator + CONFIG_PROPERTIES;
+    }
+
+    public static String generateRelativeConfigPath() {
+        return CONFIG + File.separator + CONFIG_PROPERTIES;
     }
 
 }

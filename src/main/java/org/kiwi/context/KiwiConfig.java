@@ -1,11 +1,14 @@
 package org.kiwi.context;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 import static org.kiwi.context.Constant.PROFILE_ENV;
-import static org.kiwi.context.ProfileUtil.determineProfileEnv;
-import static org.kiwi.context.ProfileUtil.generateConfigPath;
+import static org.kiwi.context.Constant.PROFILE_PRODUCTION;
+import static org.kiwi.context.ProfileUtil.*;
 
 /**
  * @email jack.liu.19910921@gmail.com
@@ -17,15 +20,44 @@ public class KiwiConfig {
 
     private KiwiConfig() {
         try {
-            String profileEnv = determineProfileEnv();
+            loadConfigFromClassPath();
+        } catch (Exception e) {
+            loadConfigFromRelativePath();
+        } finally {
+            DeployPathHolder.clear();
+        }
+    }
 
-            PropertiesHolder.setProperty(PROFILE_ENV, profileEnv);
+    private void loadConfigFromClassPath() throws IOException {
+        String profileEnv = determineProfileEnv();
 
-            String configPath = generateConfigPath(profileEnv);
+        PropertiesHolder.setProperty(PROFILE_ENV, profileEnv);
+
+        String configPath = generateDefaultConfigPath(profileEnv);
+
+        InputStream in = null;
+        try {
+            in = Thread.currentThread().getContextClassLoader().getResourceAsStream(configPath);
+
+            PROPS.load(in);
+
+            PropertiesHolder.addProperties(PROPS);
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+    }
+
+    private void loadConfigFromRelativePath() {
+        try {
+            PropertiesHolder.setProperty(PROFILE_ENV, PROFILE_PRODUCTION);
 
             InputStream in = null;
             try {
-                in = Thread.currentThread().getContextClassLoader().getResourceAsStream(configPath);
+                String relativeConfigPath = new File("").getAbsolutePath() + File.separator + generateRelativeConfigPath();
+
+                in = new FileInputStream(relativeConfigPath);
 
                 PROPS.load(in);
 
@@ -37,8 +69,6 @@ public class KiwiConfig {
             }
         } catch (Exception e) {
             throw new KiwiException("loading config has some problem.", e);
-        } finally {
-            DeployPathHolder.clear();
         }
     }
 
