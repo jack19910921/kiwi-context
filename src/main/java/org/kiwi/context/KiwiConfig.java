@@ -1,6 +1,5 @@
 package org.kiwi.context;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +21,7 @@ public class KiwiConfig {
         try {
             loadConfigFromClassPath();
         } catch (Exception e) {
-            loadConfigFromRelativePath();
+            loadConfigFromAbsolutePath();
         } finally {
             DeployPathHolder.clear();
         }
@@ -49,15 +48,13 @@ public class KiwiConfig {
         }
     }
 
-    private void loadConfigFromRelativePath() {
+    private void loadConfigFromAbsolutePath() {
         try {
             PropertiesHolder.setProperty(PROFILE_ENV, PROFILE_PRODUCTION);
 
             InputStream in = null;
             try {
-                String relativeConfigPath = new File("").getAbsolutePath() + File.separator + generateRelativeConfigPath();
-
-                in = new FileInputStream(relativeConfigPath);
+                in = new FileInputStream(generateAbsoluteConfigPath());
 
                 PROPS.load(in);
 
@@ -89,4 +86,5 @@ public class KiwiConfig {
         }
 
     }
+    
 }

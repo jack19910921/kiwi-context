@@ -20,6 +20,8 @@ public interface Constant {
 
     String CONFIG = "config";
 
+    String APP = "app";
+
     String CONFIG_PROPERTIES = "config.properties";
 
 }

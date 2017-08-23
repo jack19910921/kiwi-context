@@ -66,7 +66,7 @@ public class EnhancedPropertyPlaceholderConfigurer extends PropertyPlaceholderCo
     }
 
     private FileSystemResource buildFileSystemResource() {
-        return new FileSystemResource(generateRelativeConfigPath());
+        return new FileSystemResource(generateAbsoluteConfigPath());
     }
 
 }

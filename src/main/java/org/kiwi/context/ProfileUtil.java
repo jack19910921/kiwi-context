@@ -32,8 +32,12 @@ public class ProfileUtil {
                 File.separator + CONFIG_PROPERTIES;
     }
 
-    public static String generateRelativeConfigPath() {
-        return CONFIG + File.separator + CONFIG_PROPERTIES;
+    public static String generateAbsoluteConfigPath() {
+        String path = new File("").getAbsolutePath().replace(APP, "");
+        if (!path.endsWith(File.separator)) {
+            path = path + File.separator;
+        }
+        return path + CONFIG + File.separator + CONFIG_PROPERTIES;
     }
 
 }
